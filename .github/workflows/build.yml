@@ -9,7 +9,8 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-      - run: mvn clean compile
+      - name: Build shaded jar
+        run: mvn -B -DskipTests package
       - run: |
           java -jar target/dphe-to-json-1.0-SNAPSHOT.jar \
           https://github.com/DeepPhe/dphe-neo4j.git master \
