@@ -1,0 +1,52 @@
+{
+  "$schema" : "https://json-schema.org/draft/2020-12/schema",
+  "$defs" : {
+    "AttributeValue" : {
+      "type" : "object",
+      "properties" : {
+        "classUri" : {
+          "type" : "string"
+        },
+        "conceptIds" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "confidence" : {
+          "type" : "integer"
+        },
+        "historic" : {
+          "type" : "boolean"
+        },
+        "id" : {
+          "type" : "string"
+        },
+        "negated" : {
+          "type" : "boolean"
+        },
+        "uncertain" : {
+          "type" : "boolean"
+        },
+        "value" : {
+          "type" : "string"
+        }
+      }
+    }
+  },
+  "type" : "object",
+  "properties" : {
+    "id" : {
+      "type" : "string"
+    },
+    "name" : {
+      "type" : "string"
+    },
+    "values" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/$defs/AttributeValue"
+      }
+    }
+  }
+}

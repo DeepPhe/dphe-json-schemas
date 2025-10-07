@@ -1,0 +1,57 @@
+{
+  "$schema" : "https://json-schema.org/draft/2020-12/schema",
+  "$defs" : {
+    "NewFactInfo" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "prettyName" : {
+          "type" : "string"
+        },
+        "value" : {
+          "type" : "string"
+        }
+      }
+    },
+    "NewMentionedTerm" : {
+      "type" : "object",
+      "properties" : {
+        "begin" : {
+          "type" : "integer"
+        },
+        "end" : {
+          "type" : "integer"
+        },
+        "reportId" : {
+          "type" : "string"
+        },
+        "reportName" : {
+          "type" : "string"
+        },
+        "reportType" : {
+          "type" : "string"
+        },
+        "term" : {
+          "type" : "string"
+        }
+      }
+    }
+  },
+  "type" : "object",
+  "properties" : {
+    "mentionedTerms" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/$defs/NewMentionedTerm"
+      }
+    },
+    "sourceFact" : {
+      "$ref" : "#/$defs/NewFactInfo"
+    }
+  }
+}

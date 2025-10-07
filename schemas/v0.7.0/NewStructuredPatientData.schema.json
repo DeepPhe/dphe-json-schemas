@@ -1,0 +1,27 @@
+{
+  "$schema" : "https://json-schema.org/draft/2020-12/schema",
+  "type" : "object",
+  "properties" : {
+    "birthdate" : {
+      "type" : "string"
+    },
+    "firstEncounterDate" : {
+      "type" : "string"
+    },
+    "firstname" : {
+      "type" : "string"
+    },
+    "gender" : {
+      "type" : "string"
+    },
+    "lastEncounterDate" : {
+      "type" : "string"
+    },
+    "lastname" : {
+      "type" : "string"
+    },
+    "patientId" : {
+      "type" : "string"
+    }
+  }
+}

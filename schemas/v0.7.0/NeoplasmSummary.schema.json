@@ -1,0 +1,117 @@
+{
+  "$schema" : "https://json-schema.org/draft/2020-12/schema",
+  "$defs" : {
+    "Mention" : {
+      "type" : "object",
+      "properties" : {
+        "begin" : {
+          "type" : "integer"
+        },
+        "classUri" : {
+          "type" : "string"
+        },
+        "confidence" : {
+          "type" : "integer"
+        },
+        "end" : {
+          "type" : "integer"
+        },
+        "historic" : {
+          "type" : "boolean"
+        },
+        "id" : {
+          "type" : "string"
+        },
+        "negated" : {
+          "type" : "boolean"
+        },
+        "uncertain" : {
+          "type" : "boolean"
+        }
+      }
+    },
+    "NeoplasmAttribute" : {
+      "type" : "object",
+      "properties" : {
+        "classUri" : {
+          "type" : "string"
+        },
+        "confidence" : {
+          "type" : "integer"
+        },
+        "confidenceFeatures" : {
+          "type" : "array",
+          "items" : {
+            "type" : "integer"
+          }
+        },
+        "directEvidence" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/$defs/Mention"
+          }
+        },
+        "id" : {
+          "type" : "string"
+        },
+        "indirectEvidence" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/$defs/Mention"
+          }
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "notEvidence" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/$defs/Mention"
+          }
+        },
+        "value" : {
+          "type" : "string"
+        }
+      }
+    }
+  },
+  "type" : "object",
+  "properties" : {
+    "attributes" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/$defs/NeoplasmAttribute"
+      }
+    },
+    "classUri" : {
+      "type" : "string"
+    },
+    "er" : {
+      "type" : "string"
+    },
+    "her2" : {
+      "type" : "string"
+    },
+    "id" : {
+      "type" : "string"
+    },
+    "pathologic_m" : {
+      "type" : "string"
+    },
+    "pathologic_n" : {
+      "type" : "string"
+    },
+    "pathologic_t" : {
+      "type" : "string"
+    },
+    "pr" : {
+      "type" : "string"
+    },
+    "subSummaries" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#"
+      }
+    }
+  }
+}
