@@ -1,0 +1,48 @@
+name: Generate Schema Index
+
+on:
+  push:
+    paths:
+      - 'schemas/**/*.json'
+    branches: [ main ]
+
+jobs:
+  build-index:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Generate alphabetical index.html
+        run: |
+          echo '<!DOCTYPE html>
+          <html>
+          <head>
+            <title>DeepPhe JSON Schemas</title>
+            <style>
+              body { font-family: sans-serif; max-width: 1200px; margin: 0 auto; padding: 20px; }
+              .schema-list { column-count: 3; column-gap: 20px; }
+              @media (max-width: 900px) { .schema-list { column-count: 2; } }
+              @media (max-width: 600px) { .schema-list { column-count: 1; } }
+              h1 { border-bottom: 1px solid #eaecef; padding-bottom: 0.3em; }
+            </style>
+          </head>
+          <body>
+            <h1>DeepPhe JSON Schemas</h1>
+            <div class="schema-list">' > index.html
+
+          # Get all schema files and sort them alphabetically
+          find schemas -name "*.schema.json" | sort | while read f; do
+            filename=$(basename "$f")
+            echo "<a href=\"$f\">$filename</a><br>" >> index.html
+          done
+
+          echo '</div></body></html>' >> index.html
+
+      - name: Create .nojekyll file
+        run: touch .nojekyll
+
+      - name: Commit index files
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "Update schema index.html"
+          file_pattern: "index.html .nojekyll"
