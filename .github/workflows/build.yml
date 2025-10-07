@@ -10,7 +10,10 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
       - run: mvn clean compile
-      - run: java -cp target/classes dphe.Main https://github.com/DeepPhe/dphe-neo4j.git master src/main/java/org/healthnlp/deepphe/neo4j/node/xn ./schemas
+      - run: |
+          java -jar target/dphe-to-json-1.0-SNAPSHOT.jar \
+          https://github.com/DeepPhe/dphe-neo4j.git master \
+          src/main/java/org/healthnlp/deepphe/neo4j/node/xn ./schemas
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Update schemas
