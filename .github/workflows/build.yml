@@ -3,7 +3,7 @@ name: Generate Schemas
 on: [push]
 
 env:
-  SCHEMA_VERSION: "0.7.0"  # 👈 change this once and it updates all paths/titles
+  SCHEMA_VERSION: "0.7.0"  # change once, used everywhere
 
 jobs:
   generate:
@@ -33,14 +33,12 @@ jobs:
             src/main/java/org/healthnlp/deepphe/neo4j/node/xn \
             "./schemas/v${SCHEMA_VERSION}"
 
-      - uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: "Update schemas v${{ env.SCHEMA_VERSION }}"
-
       - name: Create pull request with changes
+        id: cpr
         uses: peter-evans/create-pull-request@v6
         with:
           branch: chore/update-schemas-v${{ env.SCHEMA_VERSION }}
+          base: main                      # set your default branch if not 'main'
           title: "chore(schemas): update generated schemas in schemas/v${{ env.SCHEMA_VERSION }}"
           commit-message: "chore(schemas): update generated JSON Schemas (schemas/v${{ env.SCHEMA_VERSION }})"
           add-paths: |
@@ -50,3 +48,12 @@ jobs:
             Source: `${{ github.repository }}@${{ github.sha }}`.
           author: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
           committer: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
+          labels: |
+            automated
+            schemas
+
+      - name: PR link
+        if: ${{ steps.cpr.outputs.pull-request-url }}
+        run: |
+          echo "Created PR: ${{ steps.cpr.outputs.pull-request-url }}"
+
