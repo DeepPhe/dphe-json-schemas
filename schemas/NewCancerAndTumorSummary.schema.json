@@ -1,0 +1,96 @@
+{
+  "$schema" : "https://json-schema.org/draft/2020-12/schema",
+  "$defs" : {
+    "NewCancerFact" : {
+      "type" : "object",
+      "properties" : {
+        "cancerFactInfo" : {
+          "$ref" : "#/$defs/NewFactInfo"
+        },
+        "relation" : {
+          "type" : "string"
+        },
+        "relationPrettyName" : {
+          "type" : "string"
+        }
+      }
+    },
+    "NewCancerSummary" : {
+      "type" : "object",
+      "properties" : {
+        "cancerFacts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/$defs/NewCancerFact"
+          }
+        },
+        "cancerId" : {
+          "type" : "string"
+        },
+        "tumors" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/$defs/NewTumorSummary"
+          }
+        }
+      }
+    },
+    "NewFactInfo" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "prettyName" : {
+          "type" : "string"
+        },
+        "value" : {
+          "type" : "string"
+        }
+      }
+    },
+    "NewTumorFact" : {
+      "type" : "object",
+      "properties" : {
+        "relation" : {
+          "type" : "string"
+        },
+        "relationPrettyName" : {
+          "type" : "string"
+        },
+        "tumorFactInfo" : {
+          "$ref" : "#/$defs/NewFactInfo"
+        }
+      }
+    },
+    "NewTumorSummary" : {
+      "type" : "object",
+      "properties" : {
+        "hasTumorType" : {
+          "type" : "string"
+        },
+        "tumorFacts" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/$defs/NewTumorFact"
+          }
+        },
+        "tumorId" : {
+          "type" : "string"
+        }
+      }
+    }
+  },
+  "type" : "object",
+  "properties" : {
+    "cancers" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/$defs/NewCancerSummary"
+      }
+    }
+  }
+}

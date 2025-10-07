@@ -1,0 +1,66 @@
+{
+  "$schema" : "https://json-schema.org/draft/2020-12/schema",
+  "$defs" : {
+    "NewReport" : {
+      "type" : "object",
+      "properties" : {
+        "date" : {
+          "type" : "string"
+        },
+        "episode" : {
+          "type" : "string"
+        },
+        "id" : {
+          "type" : "string"
+        },
+        "reportName" : {
+          "type" : "string"
+        },
+        "type" : {
+          "type" : "string"
+        }
+      }
+    },
+    "PatientInfo" : {
+      "type" : "object",
+      "properties" : {
+        "birthDate" : {
+          "type" : "string"
+        },
+        "firstEncounterAge" : {
+          "type" : "string"
+        },
+        "firstEncounterDate" : {
+          "type" : "string"
+        },
+        "gender" : {
+          "type" : "string"
+        },
+        "lastEncounterAge" : {
+          "type" : "string"
+        },
+        "lastEncounterDate" : {
+          "type" : "string"
+        },
+        "patientId" : {
+          "type" : "string"
+        },
+        "patientName" : {
+          "type" : "string"
+        }
+      }
+    }
+  },
+  "type" : "object",
+  "properties" : {
+    "patientInfo" : {
+      "$ref" : "#/$defs/PatientInfo"
+    },
+    "reportData" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/$defs/NewReport"
+      }
+    }
+  }
+}

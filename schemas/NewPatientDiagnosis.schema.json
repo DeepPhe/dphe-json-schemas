@@ -1,0 +1,21 @@
+{
+  "$schema" : "https://json-schema.org/draft/2020-12/schema",
+  "type" : "object",
+  "properties" : {
+    "diagnosis" : {
+      "type" : "array",
+      "items" : {
+        "type" : "string"
+      }
+    },
+    "diagnosisGroups" : {
+      "type" : "array",
+      "items" : {
+        "type" : "string"
+      }
+    },
+    "patientId" : {
+      "type" : "string"
+    }
+  }
+}

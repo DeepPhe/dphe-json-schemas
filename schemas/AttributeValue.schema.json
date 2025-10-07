@@ -1,0 +1,33 @@
+{
+  "$schema" : "https://json-schema.org/draft/2020-12/schema",
+  "type" : "object",
+  "properties" : {
+    "classUri" : {
+      "type" : "string"
+    },
+    "conceptIds" : {
+      "type" : "array",
+      "items" : {
+        "type" : "string"
+      }
+    },
+    "confidence" : {
+      "type" : "integer"
+    },
+    "historic" : {
+      "type" : "boolean"
+    },
+    "id" : {
+      "type" : "string"
+    },
+    "negated" : {
+      "type" : "boolean"
+    },
+    "uncertain" : {
+      "type" : "boolean"
+    },
+    "value" : {
+      "type" : "string"
+    }
+  }
+}

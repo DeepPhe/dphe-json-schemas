@@ -1,0 +1,48 @@
+{
+  "$schema" : "https://json-schema.org/draft/2020-12/schema",
+  "$defs" : {
+    "FactInfo" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "prettyName" : {
+          "type" : "string"
+        }
+      }
+    },
+    "TumorFact" : {
+      "type" : "object",
+      "properties" : {
+        "relation" : {
+          "type" : "string"
+        },
+        "relationPrettyName" : {
+          "type" : "string"
+        },
+        "tumorFactInfo" : {
+          "$ref" : "#/$defs/FactInfo"
+        }
+      }
+    }
+  },
+  "type" : "object",
+  "properties" : {
+    "hasTumorType" : {
+      "type" : "string"
+    },
+    "tumorFacts" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/$defs/TumorFact"
+      }
+    },
+    "tumorId" : {
+      "type" : "string"
+    }
+  }
+}
