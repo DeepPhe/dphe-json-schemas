@@ -1,18 +1,1 @@
-{
-  "$schema" : "https://json-schema.org/draft/2020-12/schema",
-  "type" : "object",
-  "properties" : {
-    "patientId" : {
-      "type" : "string"
-    },
-    "relationPrettyName" : {
-      "type" : "string"
-    },
-    "tumorFactRelation" : {
-      "type" : "string"
-    },
-    "valueText" : {
-      "type" : "string"
-    }
-  }
-}
+{"$schema":"https://json-schema.org/draft/2020-12/schema","type":"object","properties":{"patientId":{"type":"string","$id":"https://deepphe.github.io/dphe-json-schema/schemas/v0.7.0/String.schema.json"},"relationPrettyName":{"type":"string","$id":"https://deepphe.github.io/dphe-json-schema/schemas/v0.7.0/String.schema.json"},"tumorFactRelation":{"type":"string","$id":"https://deepphe.github.io/dphe-json-schema/schemas/v0.7.0/String.schema.json"},"valueText":{"type":"string","$id":"https://deepphe.github.io/dphe-json-schema/schemas/v0.7.0/String.schema.json"}},"$id":"https://deepphe.github.io/dphe-json-schema/schemas/v0.7.0/BiomarkerSummary.schema.json"}

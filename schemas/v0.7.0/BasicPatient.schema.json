@@ -1,4 +1,1 @@
-{
-  "$schema" : "https://json-schema.org/draft/2020-12/schema",
-  "type" : "object"
-}
+{"$schema":"https://json-schema.org/draft/2020-12/schema","type":"object","$id":"https://deepphe.github.io/dphe-json-schema/schemas/v0.7.0/BasicPatient.schema.json"}
