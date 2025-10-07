@@ -1,0 +1,342 @@
+{
+  "$schema" : "https://json-schema.org/draft/2020-12/schema",
+  "$defs" : {
+    "AttributeValue" : {
+      "type" : "object",
+      "properties" : {
+        "classUri" : {
+          "type" : "string"
+        },
+        "conceptIds" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "confidence" : {
+          "type" : "integer"
+        },
+        "historic" : {
+          "type" : "boolean"
+        },
+        "id" : {
+          "type" : "string"
+        },
+        "negated" : {
+          "type" : "boolean"
+        },
+        "uncertain" : {
+          "type" : "boolean"
+        },
+        "value" : {
+          "type" : "string"
+        }
+      }
+    },
+    "AttributeXn" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "values" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/$defs/AttributeValue"
+          }
+        }
+      }
+    },
+    "CancerSummaryXn" : {
+      "type" : "object",
+      "properties" : {
+        "attributes" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/$defs/AttributeXn"
+          }
+        },
+        "classUri" : {
+          "type" : "string"
+        },
+        "conceptIds" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "confidence" : {
+          "type" : "integer"
+        },
+        "historic" : {
+          "type" : "boolean"
+        },
+        "id" : {
+          "type" : "string"
+        },
+        "negated" : {
+          "type" : "boolean"
+        },
+        "tumors" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/$defs/TumorSummaryXn"
+          }
+        },
+        "uncertain" : {
+          "type" : "boolean"
+        }
+      }
+    },
+    "Codification" : {
+      "type" : "object",
+      "properties" : {
+        "codes" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "source" : {
+          "type" : "string"
+        }
+      }
+    },
+    "Concept" : {
+      "type" : "object",
+      "properties" : {
+        "classUri" : {
+          "type" : "string"
+        },
+        "codifications" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/$defs/Codification"
+          }
+        },
+        "confidence" : {
+          "type" : "integer"
+        },
+        "dpheGroup" : {
+          "type" : "string"
+        },
+        "historic" : {
+          "type" : "boolean"
+        },
+        "id" : {
+          "type" : "string"
+        },
+        "mentionIds" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "negated" : {
+          "type" : "boolean"
+        },
+        "preferredText" : {
+          "type" : "string"
+        },
+        "uncertain" : {
+          "type" : "boolean"
+        }
+      }
+    },
+    "ConceptRelation" : {
+      "type" : "object",
+      "properties" : {
+        "sourceId" : {
+          "type" : "string"
+        },
+        "targetId" : {
+          "type" : "string"
+        },
+        "type" : {
+          "type" : "string"
+        }
+      }
+    },
+    "DocumentXn" : {
+      "type" : "object",
+      "properties" : {
+        "date" : {
+          "type" : "string"
+        },
+        "episode" : {
+          "type" : "string"
+        },
+        "id" : {
+          "type" : "string"
+        },
+        "mentionRelations" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/$defs/MentionRelation"
+          }
+        },
+        "mentions" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/$defs/Mention"
+          }
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "sections" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/$defs/Section"
+          }
+        },
+        "text" : {
+          "type" : "string"
+        },
+        "type" : {
+          "type" : "string"
+        }
+      }
+    },
+    "Mention" : {
+      "type" : "object",
+      "properties" : {
+        "begin" : {
+          "type" : "integer"
+        },
+        "classUri" : {
+          "type" : "string"
+        },
+        "confidence" : {
+          "type" : "integer"
+        },
+        "end" : {
+          "type" : "integer"
+        },
+        "historic" : {
+          "type" : "boolean"
+        },
+        "id" : {
+          "type" : "string"
+        },
+        "negated" : {
+          "type" : "boolean"
+        },
+        "uncertain" : {
+          "type" : "boolean"
+        }
+      }
+    },
+    "MentionRelation" : {
+      "type" : "object",
+      "properties" : {
+        "sourceId" : {
+          "type" : "string"
+        },
+        "targetId" : {
+          "type" : "string"
+        },
+        "type" : {
+          "type" : "string"
+        }
+      }
+    },
+    "Section" : {
+      "type" : "object",
+      "properties" : {
+        "begin" : {
+          "type" : "integer"
+        },
+        "end" : {
+          "type" : "integer"
+        },
+        "id" : {
+          "type" : "string"
+        },
+        "type" : {
+          "type" : "string"
+        }
+      }
+    },
+    "TumorSummaryXn" : {
+      "type" : "object",
+      "properties" : {
+        "attributes" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/$defs/AttributeXn"
+          }
+        },
+        "classUri" : {
+          "type" : "string"
+        },
+        "conceptIds" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "confidence" : {
+          "type" : "integer"
+        },
+        "historic" : {
+          "type" : "boolean"
+        },
+        "id" : {
+          "type" : "string"
+        },
+        "negated" : {
+          "type" : "boolean"
+        },
+        "uncertain" : {
+          "type" : "boolean"
+        }
+      }
+    }
+  },
+  "type" : "object",
+  "properties" : {
+    "birth" : {
+      "type" : "string"
+    },
+    "cancers" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/$defs/CancerSummaryXn"
+      }
+    },
+    "conceptRelations" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/$defs/ConceptRelation"
+      }
+    },
+    "concepts" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/$defs/Concept"
+      }
+    },
+    "death" : {
+      "type" : "string"
+    },
+    "documents" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/$defs/DocumentXn"
+      }
+    },
+    "gender" : {
+      "type" : "string"
+    },
+    "id" : {
+      "type" : "string"
+    },
+    "name" : {
+      "type" : "string"
+    }
+  }
+}

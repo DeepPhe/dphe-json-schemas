@@ -1,0 +1,41 @@
+{
+  "$schema" : "https://json-schema.org/draft/2020-12/schema",
+  "$defs" : {
+    "Map(String,List(String))" : {
+      "type" : "object"
+    }
+  },
+  "type" : "object",
+  "properties" : {
+    "classUri" : {
+      "type" : "string"
+    },
+    "confidence" : {
+      "type" : "integer"
+    },
+    "confidenceFeatures" : {
+      "type" : "array",
+      "items" : {
+        "type" : "integer"
+      }
+    },
+    "directEvidenceIds" : {
+      "type" : "array",
+      "items" : {
+        "type" : "string"
+      }
+    },
+    "id" : {
+      "type" : "string"
+    },
+    "name" : {
+      "type" : "string"
+    },
+    "relatedFactIds" : {
+      "$ref" : "#/$defs/Map(String,List(String))"
+    },
+    "value" : {
+      "type" : "string"
+    }
+  }
+}
