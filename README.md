@@ -28,8 +28,10 @@ java -jar target/dphe-to-json-1.0-SNAPSHOT-shaded.jar \
   master \
   src/main/java/org/healthnlp/deepphe/neo4j/node/xn \
   ./schemas/v0.7.0
+```
 
-##🚀 GitHub Actions Automation
+
+## 🚀 GitHub Actions Automation
 
 The repository includes a workflow (.github/workflows/generate-schemas.yml) that:
 
