@@ -1,5 +1,5 @@
 name: Generate Schemas
-on: [workflow_dispatch]
+on: [push]
 jobs:
   generate:
     runs-on: ubuntu-latest
@@ -18,3 +18,16 @@ jobs:
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Update schemas
+      - name: Create pull request with changes
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: chore/update-schemas-v1
+          title: "chore(schemas): update generated schemas in schemas/v1"
+          commit-message: "chore(schemas): update generated JSON Schemas (schemas/v1)"
+          add-paths: |
+            schemas/v1/**
+          body: |
+            Automated refresh of generated JSON Schemas in `schemas/v1/`.
+            Source: `${{ github.repository }}@${{ github.sha }}`.
+          author: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
+          committer: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
