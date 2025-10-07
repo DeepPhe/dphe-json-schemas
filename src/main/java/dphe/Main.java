@@ -22,14 +22,15 @@ public class Main {
         // Get the current application's classpath which includes all Maven dependencies
         String currentClasspath = System.getProperty("java.class.path");
         System.out.println("Debug - Classpath: " + currentClasspath);
-        if (args.length < 4) {
-            System.err.println("Usage: <repoUrl> <branchOrTag> <relativeSourceDir> <outputDir>");
+        if (args.length < 5) {
+            System.err.println("Usage: <repoUrl> <branchOrTag> <relativeSourceDir> <outputDir> <schemaVersion>");
             System.exit(1);
         }
         String repoUrl = args[0];
         String branch = args[1];
         String relativeSourceDir = args[2].replace("\\", "/");
         Path outputDir = Paths.get(args[3]).toAbsolutePath();
+        String schemaVersion = args[4]; // Get version from command line arguments
         Files.createDirectories(outputDir);
 // 1) Clone shallow to temp dir
         Path workDir = Files.createTempDirectory("git2schema-");
@@ -78,7 +79,8 @@ public class Main {
         }
 // 6) Load classes and generate schemas
         try (URLClassLoader cl = new URLClassLoader(new URL[]{classesDir.toUri().toURL()})) {
-            SchemaUtil schemaUtil = new SchemaUtil(cl);
+            String baseUrl = "https://deepphe.github.io/dphe-json-schema/schemas/v" + schemaVersion + "/";
+            SchemaUtil schemaUtil = new SchemaUtil(cl, baseUrl);
             for (Map.Entry<Path, String> e : fqnMap.entrySet()) {
                 String fqn = e.getValue();
                 try {

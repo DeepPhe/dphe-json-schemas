@@ -1,31 +1,40 @@
 package dphe.utils;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.victools.jsonschema.generator.*;
 import com.github.victools.jsonschema.module.jackson.JacksonModule;
-
+import com.github.victools.jsonschema.generator.*;
 
 public class SchemaUtil {
     private final SchemaGenerator generator;
-    private final ObjectMapper mapper = new ObjectMapper();
+    private final String baseUrl;
 
-
-    public SchemaUtil(ClassLoader cl) {
-        SchemaGeneratorConfigBuilder cfgBuilder = new SchemaGeneratorConfigBuilder(
-                SchemaVersion.DRAFT_2020_12, OptionPreset.PLAIN_JSON);
-        cfgBuilder.with(new JacksonModule());
-        cfgBuilder.with(Option.DEFINITIONS_FOR_ALL_OBJECTS);
-        SchemaGeneratorConfig config = cfgBuilder.build();
-        this.generator = new SchemaGenerator(config);
+    public SchemaUtil(ClassLoader classLoader) {
+        this(classLoader, null);
     }
 
+    public SchemaUtil(ClassLoader classLoader, String baseUrl) {
+        SchemaGeneratorConfigBuilder configBuilder = new SchemaGeneratorConfigBuilder(
+                SchemaVersion.DRAFT_2020_12, OptionPreset.PLAIN_JSON)
+                .with(new JacksonModule());
 
-    public String generateSchemaJson(Class<?> type) {
-        com.fasterxml.jackson.databind.JsonNode node = generator.generateSchema(type);
-        try {
-            return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(node);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        // Add $id field if baseUrl is provided
+        if (baseUrl != null && !baseUrl.isEmpty()) {
+            final String url = baseUrl;
+            configBuilder.forTypesInGeneral()
+                .withIdResolver(scope -> {
+                    String className = scope.getType().getErasedType().getSimpleName();
+                    String schemaId = url;
+                    if (!schemaId.endsWith("/")) {
+                        schemaId += "/";
+                    }
+                    return schemaId + className + ".schema.json";
+                });
         }
+
+        SchemaGeneratorConfig config = configBuilder.build();
+        this.generator = new SchemaGenerator(config);
+        this.baseUrl = baseUrl;
+    }
+
+    public String generateSchemaJson(Class<?> clazz) {
+        return generator.generateSchema(clazz).toString();
     }
 }

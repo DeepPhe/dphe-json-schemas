@@ -31,7 +31,8 @@ jobs:
           java -jar target/dphe-to-json-1.0-SNAPSHOT.jar \
             https://github.com/DeepPhe/dphe-neo4j.git master \
             src/main/java/org/healthnlp/deepphe/neo4j/node/xn \
-            "schemas/v${SCHEMA_VERSION}"
+            "schemas/v${SCHEMA_VERSION}" \
+            ${SCHEMA_VERSION}
 
       - name: Create pull request with changes
         id: cpr
