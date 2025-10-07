@@ -1,0 +1,24 @@
+{
+  "$schema" : "https://json-schema.org/draft/2020-12/schema",
+  "type" : "object",
+  "properties" : {
+    "begin" : {
+      "type" : "integer"
+    },
+    "end" : {
+      "type" : "integer"
+    },
+    "reportId" : {
+      "type" : "string"
+    },
+    "reportName" : {
+      "type" : "string"
+    },
+    "reportType" : {
+      "type" : "string"
+    },
+    "term" : {
+      "type" : "string"
+    }
+  }
+}

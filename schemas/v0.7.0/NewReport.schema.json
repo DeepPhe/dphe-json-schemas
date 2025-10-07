@@ -1,0 +1,21 @@
+{
+  "$schema" : "https://json-schema.org/draft/2020-12/schema",
+  "type" : "object",
+  "properties" : {
+    "date" : {
+      "type" : "string"
+    },
+    "episode" : {
+      "type" : "string"
+    },
+    "id" : {
+      "type" : "string"
+    },
+    "reportName" : {
+      "type" : "string"
+    },
+    "type" : {
+      "type" : "string"
+    }
+  }
+}
