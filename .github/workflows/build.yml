@@ -1,33 +1,52 @@
 name: Generate Schemas
+
 on: [push]
+
+env:
+  SCHEMA_VERSION: "0.7.0"  # 👈 change this once and it updates all paths/titles
+
 jobs:
   generate:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
       - uses: actions/setup-java@v3
         with:
           java-version: '17'
           distribution: 'temurin'
+
       - name: Build shaded jar
         run: mvn -B -DskipTests package
-      - run: |
+
+      - name: Generate schemas
+        run: |
+          mkdir -p "schemas/v${SCHEMA_VERSION}"
           java -jar target/dphe-to-json-1.0-SNAPSHOT.jar \
-          https://github.com/DeepPhe/dphe-neo4j.git master \
-          src/main/java/org/healthnlp/deepphe/neo4j/node/xn ./schemas/v1
+            https://github.com/DeepPhe/dphe-neo4j.git master \
+            src/main/java/org/healthnlp/deepphe/neo4j/node/xn \
+            "./schemas/v${SCHEMA_VERSION}"
+
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: Update schemas
+          commit_message: "Update schemas v${{ env.SCHEMA_VERSION }}"
+
       - name: Create pull request with changes
         uses: peter-evans/create-pull-request@v6
         with:
-          branch: chore/update-schemas-v1
-          title: "chore(schemas): update generated schemas in schemas/v1"
-          commit-message: "chore(schemas): update generated JSON Schemas (schemas/v0.7.0)"
+          branch: chore/update-schemas-v${{ env.SCHEMA_VERSION }}
+          title: "chore(schemas): update generated schemas in schemas/v${{ env.SCHEMA_VERSION }}"
+          commit-message: "chore(schemas): update generated JSON Schemas (schemas/v${{ env.SCHEMA_VERSION }})"
           add-paths: |
-            schemas/v0.7.0/**
+            schemas/v${{ env.SCHEMA_VERSION }}/**
           body: |
-            Automated refresh of generated JSON Schemas in `schemas/v0.7.0/`.
+            Automated refresh of generated JSON Schemas in `schemas/v${{ env.SCHEMA_VERSION }}/`.
             Source: `${{ github.repository }}@${{ github.sha }}`.
           author: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
           committer: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
