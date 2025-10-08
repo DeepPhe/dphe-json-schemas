@@ -1,4 +1,4 @@
-# dphe-to-json
+# dphe-to-json 
 
 **dphe-to-json** is a small Java utility that generates **JSON Schemas** directly from Java classes within the [DeepPhe](https://github.com/DeepPhe) project ecosystem.
 
